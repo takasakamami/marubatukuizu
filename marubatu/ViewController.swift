@@ -15,25 +15,25 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         showQuestion()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if UserDefaults.standard.object(forKey: "qAndA") != nil {
+            questions = UserDefaults.standard.object(forKey: "qAndA") as! [[String : Any]]
+            showQuestion()
+            
+        }
+        
+    }
+    
+    
     @IBOutlet weak var monndai: UILabel!
     
     var currentQuestionNum:Int = 0
     
-    let questions: [[String:Any]] =
-        [
-        [
-            "question": "iPhoneアプリを開発する統合環境はZcodeである",
-        "answer": false
-    ],
-    [
-    "question": "Xcode画面の右側にはユーティリティーズがある",
-    "answer": true
-    ],
-    [
-    "question": "UILabelは文字列を表示する際に利用する",
-    "answer": true
-    ]]
+    var questions: [[String:Any]] = [[:]]
+
+    
+    
     
     func showQuestion() {
         let question = questions[currentQuestionNum]
